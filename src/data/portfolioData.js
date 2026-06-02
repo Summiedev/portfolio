@@ -86,7 +86,7 @@ export const projects = [
   },
   {
     stage: "Stage 8A",
-    name: "Append-Only Event Store — Bitcask Pattern",
+    name: "Dillema Labs —Append-Only Event Store ",
     description: "A durable HTTP service storing events in an append-only log file with in-memory byte-offset index, modeled on the Bitcask storage engine. No database — the log file is the database. Supports crash recovery via full log replay.",
     stack: [{ label: "Node.js" }, { label: "Bitcask / WAL", accent: true }, { label: "File I/O" }, { label: "In-memory Index" }],
     contribution: "Built the entire store: append-only write path, O(1) read via Map index + byte-range seek, streaming log replay, write queue for concurrent appends, and unicode-correct byte accounting.",
@@ -133,8 +133,8 @@ export const contactLinks = [
 
 // ─── ICONS ───────────────────────────────────────────────────────────────────
 export const featured = {
-  title: "Clinical API — SSE Notification System",
-  problem: "The clinical AI pipeline processed lab results asynchronously — OCR to Gemini interpretation to storage — taking anywhere from 5 seconds to several minutes. The client was polling GET /cases/{id}/interpretations/latest every few seconds, generating constant database reads with still-delayed feedback. The requirement: push delivery.",
+  title: "Clinsights API — SSE Notification System",
+  problem: "The clinsights AI pipeline processed lab results asynchronously — OCR to Gemini interpretation to storage — taking anywhere from 5 seconds to several minutes. The client was polling GET /cases/{id}/interpretations/latest every few seconds, generating constant database reads with still-delayed feedback. The requirement: push delivery.",
   architecture: "Two decoupled layers: the EventBus (Redis pub/sub) and the SSE endpoint. The pipeline has no knowledge of SSE — it just calls event_bus.publish(user_id, event_type, payload). The SSE endpoint holds a persistent HTTP connection and subscribes to that user's channel via an async generator.",
   endpoints: [
     "GET /notifications/stream — SSE endpoint. Authenticates via Bearer token, subscribes to EventBus, streams events, pings every 30 seconds.",
