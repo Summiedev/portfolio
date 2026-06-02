@@ -18,7 +18,7 @@ const profile = {
 const projects = [
   {
     stage: "Stage 0",
-    name: "HNG Task 00 — Baseline API",
+    name: "Baseline API",
     description: "A minimal Node.js HTTP server establishing a health check endpoint and project scaffolding. Confirmed environment setup, Vercel deployment, and baseline request handling before the main task sequence.",
     stack: [{ label: "Node.js" }, { label: "Vercel" }, { label: "JavaScript" }],
     contribution: "Set up the project from scratch: Node server, routing, health endpoint, deployment to Vercel.",
@@ -72,7 +72,7 @@ const projects = [
   },
   {
     stage: "Stage 8A",
-    name: "Append-Only Event Store — Bitcask Pattern",
+    name: "Append-Only Event Store — Dilemma Labs",
     description: "A durable HTTP service storing events in an append-only log file with in-memory byte-offset index, modeled on the Bitcask storage engine. No database — the log file is the database. Supports crash recovery via full log replay.",
     stack: [{ label: "Node.js" }, { label: "Bitcask / WAL", accent: true }, { label: "File I/O" }, { label: "In-memory Index" }],
     contribution: "Built the entire store: append-only write path, O(1) read via Map index + byte-range seek, streaming log replay, write queue for concurrent appends, and unicode-correct byte accounting.",
@@ -104,10 +104,10 @@ const skills = [
 ];
 
 const reflection = [
-  "The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early on, I was mostly focused on getting endpoints to work. As I progressed, I started thinking more about what 'working' actually means in real systems — concurrency issues, failure states, and how services behave under load or bad inputs.",
+  "The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early on, I was mostly focused on getting endpoints to work. As I progressed, I started thinking more about what 'working' actually means in real systems thus  concurrency issues, failure states, and how services behave under load or bad inputs.",
   "I started the program stronger in Node.js, but deliberately pushed myself into Python with FastAPI. That transition wasn't just syntax — it was about learning a different way of structuring APIs, async patterns, and backend architecture. I'm now comfortable building in both ecosystems.",
   "A big part of my learning came from reading system design materials and immediately trying to apply them. Instead of just consuming concepts like caching, auth flows, or scalability patterns, I had to translate them into actual code decisions. That gap between theory and implementation is where most of my growth happened.",
-  "Debugging real issues — failing tests, WebSocket/auth edge cases, rate limiting — forced me to think in terms of system behavior instead of isolated functions. I stopped asking only 'does this work?' and started asking 'how does this fail, and what happens when it does?'",
+  "Debugging real issues — failing tests, WebSocket/auth edge cases, rate limiting which forced me to think in terms of system behavior instead of isolated functions. I stopped asking only 'does this work?' and started asking 'how does this fail, and what happens when it does?'",
 ];
 
 const contactLinks = [
