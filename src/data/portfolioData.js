@@ -1,102 +1,138 @@
-export const profile = {
-  name: 'Sumayyah Abdullahi',
-  title: 'Backend Engineer',
+﻿export const profile = {
+  heroTag: 'Backend Engineer · HNG Internship',
+  firstName: 'Sumayyah',
+  lastName: 'Apatira',
   bio:
-    'I build backend systems that are meant to survive real traffic, real failure modes, and real product pressure. During HNG I was also reading system design books and turning the ideas into working code, which pushed me to think more carefully about auth, query paths, caching, storage, and reliability instead of just making endpoints pass tests.',
-  location: 'Lagos, Nigeria',
-  timezone: 'WAT (UTC+1)',
-  stack: ['Node.js', 'Python', 'FastAPI', 'MongoDB', 'PostgreSQL'],
+    'I build backend systems — APIs, auth flows, async pipelines, real-time infrastructure. During HNG I worked across Node.js and Python stacks, shipping everything from serverless query engines to append-only storage implementations and SSE notification delivery for a clinical AI product.',
+  location: 'Lagos, Nigeria · WAT (UTC+1)',
+  stackLabel: 'Node.js · Python · FastAPI',
   contacts: {
     github: 'https://github.com/Summiedev',
-    email: 'sumayyahabdullahi@email.com',
-    linkedin: 'https://www.linkedin.com/in/sumayyah-abdullahi',
+    email: 'apatirasummie@email.com',
+    linkedin: 'https://www.linkedin.com/in/sumayyah-apatira-b5814224a',
   },
 };
 
 export const projects = [
   {
     stage: 'Stage 0',
-    name: 'HNG Task 00 - Baseline API',
+    name: 'HNG Task 00 — Baseline API',
     description:
-      'A minimal Node.js HTTP server that established the health check endpoint, basic routing, and deployment baseline before the rest of the internship tasks.',
-    stack: ['Node.js', 'JavaScript', 'Vercel'],
+      'A minimal Node.js HTTP server establishing a health check endpoint and project scaffolding. Confirmed environment setup, Vercel deployment, and baseline request handling before the main task sequence.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'Vercel' },
+      { label: 'JavaScript' },
+    ],
     contribution:
-      'Set up the project from scratch, implemented the request handler, exposed the health endpoint, and deployed the service to Vercel.',
-    proofLabel: 'GitHub',
-    proofHref: 'https://github.com/Summiedev/HNG_TASK_00',
+      'Set up the project from scratch: Node server, routing, health endpoint, deployment to Vercel.',
     proofText: 'github.com/Summiedev/HNG_TASK_00',
+    proofHref: 'https://github.com/Summiedev/HNG_TASK_00',
   },
   {
     stage: 'Stage 1',
-    name: 'Profile API - Parallel Enrichment Service',
+    name: 'Profile API — Parallel Enrichment Service',
     description:
-      'A serverless API that accepts a name, calls Genderize, Agify, and Nationalize in parallel, aggregates the response, and stores the result in MongoDB with idempotent behavior.',
-    stack: ['Node.js', 'MongoDB', 'Vercel Serverless', 'UUID v7'],
+      'A serverless API that accepts a name, fires parallel requests to Genderize, Agify, and Nationalize, aggregates the results into a unified profile, and persists it to MongoDB. Idempotent by design — submitting the same name twice returns the existing record.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'MongoDB' },
+      { label: 'Vercel Serverless' },
+      { label: 'UUID v7', accent: true },
+    ],
     contribution:
-      'Built the full service: Promise.all-based enrichment calls, aggregation logic, unique-index-backed deduplication, UUID generation, CORS handling, and structured error responses.',
-    proofLabel: 'GitHub + Demo',
+      'Built the full service: parallel external API calls with Promise.all, profile aggregation logic, MongoDB unique-index-enforced idempotency, UUID v7 generator, CORS handling, and structured error responses across all edge cases (missing data, external API failure, method restrictions).',
+    proofText: 'github.com/Summiedev/HNG_TASK_01 · hng-task-01-flame.vercel.app',
     proofHref: 'https://github.com/Summiedev/HNG_TASK_01',
-    proofText: 'github.com/Summiedev/HNG_TASK_01',
   },
   {
     stage: 'Stage 2',
-    name: 'Insighta Labs - Demographic Query Engine',
+    name: 'Insighta Labs — Demographic Query Engine',
     description:
-      'Extended the profile store into a query engine with filter, sort, and pagination support plus a rule-based natural language search endpoint.',
-    stack: ['Node.js', 'MongoDB Atlas', 'Vercel', 'Rule-based parser'],
+      'Extended the Task 1 profile store into a full query engine. Supports combined filter + sort + pagination against 2026 seeded profiles, plus a natural-language search endpoint that parses plain-English queries into MongoDB filter objects without any AI or LLMs.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'MongoDB Atlas' },
+      { label: 'Vercel' },
+      { label: 'NL Parser', accent: true },
+      { label: 'Rule-based' },
+    ],
     contribution:
-      'Wrote the parser and query builder, seeded the dataset, and implemented the filtered, sorted, and paginated endpoints without using an LLM.',
-    proofLabel: 'GitHub + Demo',
+      'Wrote the rule-based natural language parser (regex + lookup tables — gender detection, age keyword mapping, country/nationality detection), the query builder that converts parsed parameters into MongoDB filter + sort objects, the seeding pipeline, and the full set of filtered/sorted/paginated endpoints.',
+    proofText: 'github.com/Summiedev/HNG_TASK_02 · hng-task-02.vercel.app',
     proofHref: 'https://github.com/Summiedev/HNG_TASK_02',
-    proofText: 'github.com/Summiedev/HNG_TASK_02',
   },
   {
     stage: 'Stage 3',
-    name: 'Insighta Labs+ Backend - Auth and RBAC',
+    name: 'Insighta Labs+ Backend — Auth & RBAC',
     description:
-      'A production backend with GitHub OAuth PKCE, JWT access and refresh tokens, role-based access control, rate limiting, logging, and CSV export.',
-    stack: ['Node.js', 'MongoDB', 'JWT', 'OAuth PKCE', 'GitHub Actions'],
+      'Production backend adding GitHub OAuth with PKCE, JWT access/refresh token lifecycle, role-based access control (admin vs analyst), versioned API headers, rate limiting, structured request logging, and CSV profile export. Consumed by both the CLI and the web portal.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'MongoDB' },
+      { label: 'JWT' },
+      { label: 'OAuth + PKCE', accent: true },
+      { label: 'Vercel' },
+      { label: 'GitHub CI/CD' },
+    ],
     contribution:
-      'Built the auth system end to end: token lifecycle, refresh rotation, revocation, middleware for roles, per-route rate limits, request logging, and admin export flow.',
-    proofLabel: 'GitHub + Demo',
+      'Built the entire auth system: GitHub OAuth PKCE flow, token issuance and refresh (access 3 min TTL, refresh 5 min TTL with rotation), logout with server-side revocation, role enforcement middleware, versioned API headers, per-role rate limits (10 req/min auth, 60 req/min query), structured request logging, and streaming CSV export for admin users.',
+    proofText: 'github.com/Summiedev/insighta-backend · insighta-backend.pxxl.click',
     proofHref: 'https://github.com/Summiedev/insighta-backend',
-    proofText: 'github.com/Summiedev/insighta-backend',
   },
   {
     stage: 'Stage 5',
-    name: 'Clinical Lab Insight - AI Analysis Pipeline',
+    name: 'Clinical Lab Insight — AI Analysis Pipeline',
     description:
-      'A FastAPI service that processes uploaded lab results asynchronously using OCR, Gemini analysis, PostgreSQL, Redis, and Celery workers.',
-    stack: ['Python', 'FastAPI', 'Celery', 'PostgreSQL', 'Redis', 'Alembic'],
+      'AI-powered lab result interpretation for Nigerian patients. Users upload a lab result image; the system extracts values via OCR, runs them through Gemini AI for interpretation, and delivers results asynchronously via Celery workers. Includes doctor second-opinion workflows.',
+    stack: [
+      { label: 'Python' },
+      { label: 'FastAPI' },
+      { label: 'Celery' },
+      { label: 'PostgreSQL' },
+      { label: 'Redis' },
+      { label: 'Gemini AI', accent: true },
+      { label: 'Alembic' },
+    ],
     contribution:
-      'Built the upload endpoint, task queue, status polling, migrations, and the local worker setup used to process OCR and AI interpretation jobs.',
-    proofLabel: 'GitHub',
-    proofHref: 'https://github.com/Summiedev/HNG_TASK_05',
+      'Built the async analysis pipeline: FastAPI upload endpoint, Celery task for OCR + AI interpretation, Alembic migrations, status-polling endpoints, and local development setup (venv, environment config, worker startup). Set up the Celery worker queue configuration and Redis broker integration.',
     proofText: 'github.com/Summiedev/HNG_TASK_05',
-  },
-  {
-    stage: 'Stage 6',
-    name: 'Clinical API - EventBus and SSE Notifications',
-    description:
-      'Real-time notification delivery for the clinical pipeline using Server-Sent Events, Redis pub/sub, and PostgreSQL-backed replay for missed events.',
-    stack: ['Python', 'FastAPI', 'SSE', 'Redis Pub/Sub', 'PostgreSQL'],
-    contribution:
-      'Implemented the EventBus, the authenticated SSE endpoint, keepalive pings, disconnect handling, and replay logic using Last-Event-ID.',
-    proofLabel: 'GitHub',
-    proofHref: 'https://github.com/hngprojects/clinical-api',
-    proofText: 'github.com/hngprojects/clinical-api',
+    proofHref: 'https://github.com/Summiedev/HNG_TASK_05',
   },
   {
     stage: 'Stage 8A',
-    name: 'Append-Only Event Store - Bitcask Pattern',
+    name: 'Append-Only Event Store — Bitcask Pattern',
     description:
-      'A durable HTTP service that stores events in an append-only log file with an in-memory byte-offset index and crash recovery via log replay.',
-    stack: ['Node.js', 'File I/O', 'Bitcask', 'Write-ahead log'],
+      'A durable HTTP service that stores events in an append-only log file with an in-memory byte-offset index, modeled on the Bitcask storage engine. No database — the log file is the database. Supports crash recovery via full log replay on startup.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'Bitcask / WAL', accent: true },
+      { label: 'File I/O' },
+      { label: 'In-memory Index' },
+      { label: 'Byte-offset Seeks' },
+    ],
     contribution:
-      'Built the append-only write path, O(1) reads through byte-offset seeks, concurrent write serialization, and replay-based recovery on startup.',
-    proofLabel: 'GitHub',
-    proofHref: 'https://github.com/Summiedev/HNG_TASK_08A',
+      'Built the entire store: append-only write path with byte-offset tracking, O(1) read via Map index + fs.read byte-range seek, streaming log replay for crash recovery, write queue to serialize concurrent appends, and correct unicode byte accounting using Buffer.byteLength (not string .length). Documented the WAL and Bitcask concepts and trade-offs.',
     proofText: 'github.com/Summiedev/HNG_TASK_08A',
+    proofHref: 'https://github.com/Summiedev/HNG_TASK_08A',
+  },
+  {
+    stage: 'Stage 6',
+    name: 'Clinical API — EventBus & SSE Notifications',
+    description:
+      'Real-time notification delivery for the clinical AI pipeline. When a lab result finishes processing, the server pushes an event to the connected client immediately via Server-Sent Events — no polling. Part of a larger Stage 6 system alongside a fault-tolerant pipeline and WebSocket chat.',
+    stack: [
+      { label: 'Python' },
+      { label: 'FastAPI' },
+      { label: 'SSE', accent: true },
+      { label: 'Redis Pub/Sub' },
+      { label: 'Async Generators' },
+      { label: 'PostgreSQL' },
+    ],
+    contribution:
+      'Implemented the EventBus class backed by Redis pub/sub, the SSE stream endpoint (Bearer auth, async generator, clean disconnect handling), keepalive comment pings every 30 seconds to survive proxy timeouts, missed-event replay using Last-Event-ID header against persisted Notification records, and notification preference endpoints (GET/PATCH /notifications/preferences).',
+    proofText: 'github.com/hngprojects/clinical-api (contributor: Summiedev)',
+    proofHref: 'https://github.com/hngprojects/clinical-api',
   },
 ];
 
@@ -104,109 +140,81 @@ export const skills = [
   {
     name: 'API Design',
     detail:
-      'RESTful endpoints with predictable request and response shapes, pagination contracts, and a rule-based query model for analyst workflows. Evidence: HNG Task 01, Insighta Labs, and Clinical API work.',
+      'Designed RESTful APIs across Node.js (Vercel serverless) and Python (FastAPI). Built versioned endpoints, consistent error shapes, pagination contracts with HATEOAS links. Projects: Task 01, 02, 03, 05, 06.',
   },
   {
     name: 'Authentication',
     detail:
-      'GitHub OAuth PKCE, JWT access/refresh rotation, token revocation, and centralized role enforcement. Evidence: Insighta Labs+ auth backend.',
+      'GitHub OAuth 2.0 with PKCE, JWT access + refresh token lifecycle with rotation and server-side revocation, role-based access control (admin/analyst), per-request auth middleware. Project: Insighta Labs+ Backend (Stage 3).',
   },
   {
     name: 'Databases',
     detail:
-      'MongoDB Atlas with compound indexes and aggregation pipelines, plus PostgreSQL with async access and Alembic migrations. Evidence: HNG tasks and the clinical pipelines.',
+      'MongoDB Atlas (native driver, compound indexes, bulk writes, aggregations) and PostgreSQL (async via asyncpg, Alembic migrations, indexed foreign keys). Projects: Task 01–03 (Mongo), Task 05–06 (Postgres).',
   },
   {
     name: 'Background Jobs',
     detail:
-      'Celery workers with Redis broker for async OCR and AI pipelines, including queue configuration and status polling. Evidence: clinical lab AI pipeline.',
+      'Celery workers with Redis broker for async OCR + AI processing. Separate named queues, pool configuration for Windows/Linux, acks_late for at-least-once delivery. Project: Clinical Lab Insight (Stage 5).',
   },
   {
-    name: 'Real-time Delivery',
+    name: 'Real-time / SSE',
     detail:
-      'SSE notifications backed by Redis pub/sub, keepalive pings, and event replay for disconnected clients. Evidence: Clinical API notifications.',
+      'Server-Sent Events endpoint with async generator pattern, Redis pub/sub EventBus, 30-second keepalive pings, Last-Event-ID missed-event replay, clean request.is_disconnected() handling. Project: Clinical API SSE (Stage 6).',
   },
   {
-    name: 'Query Performance',
+    name: 'Storage & Durability',
     detail:
-      'Targeted indexes, pagination, cached query results, and a read-heavy service design. Evidence: Insighta Labs query engine and scaling design.',
-  },
-  {
-    name: 'Storage and Durability',
-    detail:
-      'Append-only log design, byte-offset indexes, crash recovery by replay, and durable write serialization. Evidence: append-only event store.',
+      'Append-only log design (Bitcask pattern), byte-offset indexing, crash recovery via log replay, concurrent write serialization, unicode-correct byte accounting. Project: Event Store (Stage 8A).',
   },
   {
     name: 'Rate Limiting',
     detail:
-      'Route-specific request limits with consistent 429 behavior for auth and query endpoints. Evidence: Insighta Labs backend.',
+      'Per-endpoint rate limiting with separate windows for auth (10 req/min) and query (60 req/min) endpoints, 429 responses with correct headers. Project: Insighta Labs+ Backend (Stage 3).',
   },
   {
-    name: 'Testing and Deployment',
+    name: 'Testing & Deployment',
     detail:
-      'Integration checks, Python tooling, GitHub Actions pipelines, and Vercel deployments. Evidence: multiple HNG tasks and backend services.',
+      'Integration test scripts against live endpoints, pytest setup with pre-commit hooks, GitHub Actions CI/CD pipeline (lint → test → build → deploy), Vercel serverless deployments. Projects: Task 03, 05.',
   },
   {
     name: 'Logging',
     detail:
-      'Structured request logging and audit trails with enough context to debug failures after the fact. Evidence: Insighta Labs and clinical service logs.',
+      'Structured per-request logging (method, endpoint, status, latency). Pipeline audit log with full event history per case (event type, provider, duration, attempt, error). Projects: Task 03, Stage 6.',
   },
 ];
 
-export const insightaDeepDive = {
-  title: 'Insighta Labs+ backend design',
+export const featured = {
+  title: 'Clinical API — SSE Notification System',
   problem:
-    'Insighta Labs+ had to stop behaving like a simple API playground and start behaving like a real platform: one backend shared safely by a browser portal and a CLI, with auth, rate limiting, query caching, and a low-cost path for growing analytic load.',
+    'The clinical AI pipeline processed lab results asynchronously — OCR, then Gemini interpretation, then storage. The pipeline could finish anywhere from 5 seconds to several minutes later. The client had no way to know. It was polling GET /cases/{id}/interpretations/latest every few seconds, generating constant database reads and still delivering delayed feedback. The requirement was push delivery: when the pipeline finishes, the client knows immediately.',
+  architecture:
+    'The design uses two decoupled layers: the EventBus (Redis pub/sub) and the SSE endpoint. The pipeline has no knowledge of SSE — it just calls event_bus.publish(user_id, event_type, payload). The SSE endpoint holds a persistent HTTP connection and subscribes to that user\'s channel via an async generator.',
+  flowDiagram:
+    'Client opens GET /notifications/stream\n │\n │  (pipeline finishes — calls event_bus.publish)\n │\n ▼\nEventBus.publish → Redis channel f"events:{user_id}"\n │\n ▼\nEventBus.subscribe (async generator) → yields deserialized event\n │\n ▼\nSSE endpoint → writes "event: interpretation_ready\ndata: {...}\n\n"\n │\n ▼\nClient receives push notification immediately',
   endpoints: [
-    'GET /auth/start - start the GitHub PKCE flow for browser or CLI sign-in.',
-    'POST /auth/callback - exchange GitHub code for JWT access and refresh tokens.',
-    'POST /profiles/search - parse structured filters, run cached queries, and return paginated results.',
-    'GET /admin/export - authenticated CSV export with RBAC checks.',
-    'GET /notifications/stream - SSE subscription for live event delivery and replay.',
+    'GET /notifications/stream — SSE endpoint. Authenticates via Bearer token, subscribes to EventBus, streams events as they arrive, pings every 30 seconds.',
+    'GET /notifications/preferences — Returns the user\'s notification settings (e.g. notify_on_complete flag).',
+    'PATCH /notifications/preferences — Updates notification preferences. The pipeline checks this before publishing.',
+    'EventBus (app/services/events.py) — Redis pub/sub wrapper. publish() serialises to JSON and pushes to channel. subscribe() is an async generator yielding events or None on 30-second timeout (for keepalive handling upstream).',
   ],
-  architecture: [
-    'Browser portal and CLI both authenticate with GitHub PKCE, but the backend issues the platform tokens.',
-    'Auth middleware validates JWTs, enforces roles, and applies rate limiting before business logic.',
-    'The query service uses the primary database as source of truth and adds a read cache for repeated analyst queries.',
-    'Batch ingestion updates the store separately from the read path, keeping writes from slowing frequent searches.',
-    'Log and audit trails capture every auth, query, and export request for visibility in production-like conditions.',
-  ],
-  challenge:
-    'The biggest challenge was making the same backend support two client patterns without weakening security: browser sessions needed HTTP-only cookies and CSRF-safe flows, while the CLI needed refreshable credentials stored locally. I solved it by centralizing auth in one token service, using short-lived access tokens, refresh rotation, and a consistent RBAC middleware layer for both clients.',
-  decisions: [
-    'Use short-lived tokens plus refresh rotation to reduce the blast radius of leaked credentials.',
-    'Centralize auth and RBAC so browser and CLI traffic share the same policy surface.',
-    'Keep the web portal session state in HTTP-only cookies to avoid client-side token storage.',
-    'Add a small query cache for common filters and paginated analytics to reduce repeated database work.',
-    'Prefer a single region and simple operational model over premature distributed complexity.',
-    'Treat system design ideas as hypotheses: keep what improves the product and discard what does not.',
-  ],
-  tradeoffs: [
-    'Caching makes repeated queries faster but requires careful invalidation after batch writes.',
-    'Short token lifetimes improve security but increase refresh traffic and expiry handling complexity.',
-    'A single-region design is simpler, but it does not provide global failover or multi-region latency optimization.',
-    'Targeted indexing helps the common query paths, but not every possible ad hoc analytics pattern.',
+  challenge: [
+    'SSE connections drop — proxy timeouts, network blips, tab refreshes. When a client reconnects, any events fired while it was disconnected are gone from Redis. The browser\'s SSE spec includes a Last-Event-ID header precisely for this.',
+    'The solution required two things working together: every event pushed over SSE includes an id: field set to the Notification record\'s database UUID, and every event also writes a Notification row to PostgreSQL with a delivered_at column. On reconnect, if Last-Event-ID is present, the endpoint queries for undelivered notifications created after that ID and replays them before entering the live subscription loop. The Redis pub/sub handles live delivery; the database handles durability and replay. Neither layer knows about the other\'s job.',
   ],
 };
 
 export const reflection = [
-  'The biggest shift during HNG was moving from feature thinking to systems thinking. I was reading about those ideas in books, but the internship is where they stopped being abstract. Early stages were about making things work; later stages were about what happens under concurrency, retries, reconnects, and restarts.',
-  'Stage 8A made storage concrete. Tracking byte offsets, replaying a log, and serializing concurrent writes showed me how durable systems actually behave under the hood, and why the textbook version of a design still needs careful implementation choices.',
-  'The SSE work taught me to design for disconnects and replay before worrying about the happy path. That changed how I think about long-lived connections and made me more deliberate about failure handling.',
-  'The auth backend pushed me to treat security as explicit decisions: PKCE, refresh rotation, revocation, and centralized middleware were all deliberate choices rather than afterthoughts. Reading about them helped, but implementing them made the lessons stick.',
-  'I left HNG stronger in Node.js and much more comfortable in Python async stacks such as FastAPI, Celery, asyncpg, and Alembic, but the bigger change was confidence: I now trust myself to take a system design idea, pressure-test it, and build it into something real.',
+  'The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early stages were about making things work. Later stages were about understanding what "work" actually means under concurrent load, network failures, and process restarts.',
+  'Task 08A made this concrete. Before it, I thought of databases as external services you connect to. Building the event store from scratch — tracking byte offsets, streaming log replay, serialising concurrent writes into a queue — showed me what a database is actually doing underneath. The WAL pattern, Bitcask, log-structured storage: these stopped being interview terms and became mental models I actually use.',
+  'The SSE work on the clinical API was the first time I built a genuinely stateful server feature. Getting async generators right, handling disconnects cleanly, and figuring out the replay problem — those required understanding the whole request lifecycle, not just the happy path. I learned to design for the edges first.',
+  'The auth system in Stage 3 taught me that security is a series of explicit decisions, not a default. PKCE matters. Token rotation matters. Centralised middleware matters — not scattering role checks across every handler. Every shortcut I considered and rejected made the resulting code more trustworthy.',
+  'Technically, I came in stronger on Node.js and left also comfortable with the Python async ecosystem — FastAPI, asyncpg, Celery, Alembic. I\'m slower in Python than in Node.js but I know the patterns now. That was the gap I wanted to close.',
 ];
 
 export const contactLinks = [
   { label: 'GitHub', value: 'github.com/Summiedev', href: profile.contacts.github },
   { label: 'Email', value: profile.contacts.email, href: `mailto:${profile.contacts.email}` },
-  { label: 'LinkedIn', value: 'linkedin.com/in/sumayyah-abdullahi', href: profile.contacts.linkedin },
-  { label: 'Location', value: `${profile.location} - ${profile.timezone}` },
+  { label: 'Location', value: profile.location },
+  { label: 'LinkedIn', value: 'https://www.linkedin.com/in/sumayyah-apatira-b5814224a', href: profile.contacts.linkedin },
 ];
-
-export const submissionNote = {
-  stack:
-    'React, Vite, JavaScript, and a custom CSS system using theme variables, grid layouts, and reusable sections.',
-  intent:
-    'The portfolio is meant to show backend depth quickly: what I built, how I secured it, how I would scale it without overengineering, and how I learned to turn system design reading into practical engineering decisions.',
-};

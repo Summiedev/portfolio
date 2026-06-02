@@ -1,18 +1,9 @@
-export default function ContactCard({ label, value, href }) {
-  const content = (
-    <>
-      <span className="contact-card__label">{label}</span>
-      <span className="contact-card__value">{value}</span>
-    </>
+﻿export default function ContactCard({ label, value, href }) {
+  const Wrapper = href ? 'a' : 'div';
+  return (
+    <Wrapper className="contact-card" href={href} target={href ? '_blank' : undefined} rel={href ? 'noreferrer' : undefined}>
+      <div className="contact-label">{label}</div>
+      <div className="contact-value">{value}</div>
+    </Wrapper>
   );
-
-  if (href) {
-    return (
-      <a className="contact-card" href={href} target={href.startsWith('mailto:') ? undefined : '_blank'} rel={href.startsWith('mailto:') ? undefined : 'noreferrer'}>
-        {content}
-      </a>
-    );
-  }
-
-  return <div className="contact-card">{content}</div>;
 }

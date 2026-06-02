@@ -1,14 +1,9 @@
-export default function SectionHeader({ index, eyebrow, title, description }) {
+﻿export default function SectionHeader({ index, title }) {
   return (
     <div className="section-header">
-      <div className="section-header__meta">
-        <span className="section-header__index">{index}</span>
-        <span className="section-header__eyebrow">{eyebrow}</span>
-      </div>
-      <div className="section-header__body">
-        <h2>{title}</h2>
-        {description ? <p>{description}</p> : null}
-      </div>
+      <span className="section-num">{index}</span>
+      <h2 className="section-title">{title}</h2>
+      <div className="section-line"></div>
     </div>
   );
 }
