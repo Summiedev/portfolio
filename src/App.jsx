@@ -6,7 +6,6 @@ import {
   profile,
   projects,
   skills,
-  stage4,
   featured,
   reflection,
   contactLinks,
@@ -15,6 +14,7 @@ import {
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -23,16 +23,27 @@ function App() {
   return (
     <div className="site-shell">
       <nav>
-        <div className="wrap">
-          <a href="#" className="nav-logo">Sumayyah</a>
-          <div className="site-nav">
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#scale">Scale</a>
-            <a href="#featured">Deep Dive</a>
-            <a href="#learning">Reflection</a>
-            <a href="#contact">Contact</a>
+        <div className="wrap nav-wrap">
+          <div className="nav-brand">Backend Portfolio</div>
+
+          <button
+            className={`menu-toggle ${navOpen ? 'open' : ''}`}
+            onClick={() => setNavOpen((value) => !value)}
+            aria-label="Toggle navigation"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+          <div className={`site-nav ${navOpen ? 'open' : ''}`}>
+            <a href="#projects" onClick={() => setNavOpen(false)}>Projects</a>
+            <a href="#skills" onClick={() => setNavOpen(false)}>Skills</a>
+            <a href="#featured" onClick={() => setNavOpen(false)}>Deep Dive</a>
+            <a href="#learning" onClick={() => setNavOpen(false)}>Reflection</a>
+            <a href="#contact" onClick={() => setNavOpen(false)}>Contact</a>
           </div>
+
           <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             {theme === 'dark' ? 'Light' : 'Dark'} mode
           </button>
@@ -72,72 +83,10 @@ function App() {
         </div>
       </section>
 
-      <section className="section" id="skills">
-        <div className="wrap">
-          <SectionHeader index="02" title="Backend Skills" />
-          <table className="skills-table">
-            <tbody>
-              {skills.map((skill) => (
-                <tr key={skill.name}>
-                  <td className="skill-name">{skill.name}</td>
-                  <td className="skill-detail">{skill.detail}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="section" id="scale">
-        <div className="wrap">
-          <div className="section-header">
-            <span className="section-num">03</span>
-            <h2 className="section-title">Stage 4 Scale</h2>
-            <div className="section-line"></div>
-          </div>
-          <div className="featured-block">
-            <div className="featured-subtitle">Systems Design</div>
-            <div className="featured-title">{stage4.title}</div>
-
-            <div className="featured-section">
-              <h4>Overview</h4>
-              <p>{stage4.summary}</p>
-            </div>
-
-            <div className="featured-section">
-              <h4>Requirements</h4>
-              <ul>
-                {stage4.requirements.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="featured-section">
-              <h4>Design Decisions</h4>
-              <ul>
-                {stage4.decisions.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="featured-section">
-              <h4>Trade-offs</h4>
-              <ul>
-                {stage4.tradeoffs.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="section" id="featured">
         <div className="wrap">
           <div className="section-header">
-            <span className="section-num">04</span>
+            <span className="section-num">03</span>
             <h2 className="section-title">Featured Project</h2>
             <div className="section-line"></div>
           </div>
@@ -153,7 +102,6 @@ function App() {
             <div className="featured-section">
               <h4>Architecture</h4>
               <p>{featured.architecture}</p>
-              <div className="flow-diagram">{featured.flowDiagram}</div>
             </div>
 
             <div className="featured-section">
@@ -178,7 +126,7 @@ function App() {
       <section className="section" id="learning">
         <div className="wrap">
           <div className="section-header">
-            <span className="section-num">05</span>
+            <span className="section-num">04</span>
             <h2 className="section-title">Learning Reflection</h2>
             <div className="section-line"></div>
           </div>
@@ -193,22 +141,27 @@ function App() {
       <section className="section" id="contact">
         <div className="wrap">
           <div className="section-header">
-            <span className="section-num">06</span>
+            <span className="section-num">05</span>
             <h2 className="section-title">Contact</h2>
             <div className="section-line"></div>
           </div>
-          <p className="contact-intro">{contactIntro}</p>
-          <div className="contact-grid">
-            {contactLinks.map((contact) => (
-              <ContactCard key={contact.label} {...contact} />
-            ))}
+          <div className="contact-panel">
+            <div className="contact-copy">
+              <p className="contact-intro">{contactIntro}</p>
+              <div className="contact-hint">Ready to collaborate on secure APIs, reliable auth, and scalable backend systems.</div>
+            </div>
+            <div className="contact-grid">
+              {contactLinks.map((contact) => (
+                <ContactCard key={contact.label} {...contact} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <footer>
         <div className="wrap">
-          <p>Built with React · HNG Internship review · 2026</p>
+          <p>Built with React ❤️ | Credits: HNG Internship | 2026</p>
         </div>
       </footer>
     </div>

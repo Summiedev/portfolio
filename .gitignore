@@ -1,3 +1,5 @@
 node_modules/
 portfolio.html
 .sixth/
+.vercel
+.env*.local

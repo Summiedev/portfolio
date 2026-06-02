@@ -1,14 +1,14 @@
 ﻿export const profile = {
-  heroTag: 'Backend Engineer · HNG Internship',
+  heroTag: 'Backend Engineer',
   firstName: 'Sumayyah',
   lastName: 'Apatira',
   bio:
-    'I build backend systems — APIs, auth flows, async pipelines, real-time infrastructure. During HNG I worked across Node.js and Python stacks, shipping everything from serverless query engines to append-only storage implementations and SSE notification delivery for a clinical AI product.',
+    'I build backend systems, APIs, auth flows, async pipelines, real-time infrastructure. During HNG I worked across Node.js and Python stacks, shipping everything from serverless query engines to append-only storage implementations and SSE notification delivery for a clinical AI product.',
   location: 'Lagos, Nigeria · WAT (UTC+1)',
   stackLabel: 'Node.js · Python · FastAPI',
   contacts: {
     github: 'https://github.com/Summiedev',
-    email: 'apatirasummie@email.com',
+    email: 'apatirasummie@gmail.com',
     linkedin: 'https://www.linkedin.com/in/sumayyah-apatira-b5814224a',
   },
 };
@@ -33,7 +33,7 @@ export const projects = [
     stage: 'Stage 1',
     name: 'Profile API — Parallel Enrichment Service',
     description:
-      'A serverless API that accepts a name, fires parallel requests to Genderize, Agify, and Nationalize, aggregates the results into a unified profile, and persists it to MongoDB. Idempotent by design — submitting the same name twice returns the existing record.',
+      'A serverless API that accepts a name, fires parallel requests to Genderize, Agify, and Nationalize, aggregates the results into a unified profile, and persists it to MongoDB. Idempotent by design, submitting the same name twice returns the existing record.',
     stack: [
       { label: 'Node.js' },
       { label: 'MongoDB' },
@@ -58,7 +58,7 @@ export const projects = [
       { label: 'Rule-based' },
     ],
     contribution:
-      'Wrote the rule-based natural language parser (regex + lookup tables — gender detection, age keyword mapping, country/nationality detection), the query builder that converts parsed parameters into MongoDB filter + sort objects, the seeding pipeline, and the full set of filtered/sorted/paginated endpoints.',
+      'Wrote the rule-based natural language parser (regex + lookup tables, gender detection, age keyword mapping, country/nationality detection), the query builder that converts parsed parameters into MongoDB filter + sort objects, the seeding pipeline, and the full set of filtered/sorted/paginated endpoints.',
     proofText: 'github.com/Summiedev/HNG_TASK_02 · hng-task-02.vercel.app',
     proofHref: 'https://github.com/Summiedev/HNG_TASK_02',
   },
@@ -121,7 +121,7 @@ export const projects = [
     stage: 'Stage 8A',
     name: 'Append-Only Event Store — Bitcask Pattern',
     description:
-      'A durable HTTP service that stores events in an append-only log file with an in-memory byte-offset index, modeled on the Bitcask storage engine. No database — the log file is the database. Supports crash recovery via full log replay on startup.',
+      'A durable HTTP service that stores events in an append-only log file with an in-memory byte-offset index, modeled on the Bitcask storage engine. No database, the log file is the database. Supports crash recovery via full log replay on startup.',
     stack: [
       { label: 'Node.js' },
       { label: 'Bitcask / WAL', accent: true },
@@ -138,7 +138,7 @@ export const projects = [
     stage: 'Stage 6',
     name: 'Clinsights API — EventBus & SSE Notifications',
     description:
-      'Real-time notification delivery for the Clinsights pipeline. When a lab result finishes processing, the server pushes an event to the connected client immediately via Server-Sent Events — no polling. Part of a larger Stage 6 system alongside a fault-tolerant pipeline and WebSocket chat.',
+      'Real-time notification delivery for the Clinsights pipeline. When a lab result finishes processing, the server pushes an event to the connected client immediately via Server-Sent Events, with no polling. Part of a larger Stage 6 system alongside a fault-tolerant pipeline and WebSocket chat.',
     stack: [
       { label: 'Python' },
       { label: 'FastAPI' },
@@ -247,27 +247,27 @@ export const stage4 = {
 export const featured = {
   title: 'Clinical API — SSE Notification System',
   problem:
-    'The clinical AI pipeline processed lab results asynchronously — OCR, then Gemini interpretation, then storage. The pipeline could finish anywhere from 5 seconds to several minutes later. The client had no way to know. It was polling GET /cases/{id}/interpretations/latest every few seconds, generating constant database reads and still delivering delayed feedback. The requirement was push delivery: when the pipeline finishes, the client knows immediately.',
+    'The clinical AI pipeline processed lab results asynchronously, from OCR to Gemini interpretation to storage. The pipeline could finish anywhere from 5 seconds to several minutes later. The client had no way to know. It was polling GET /cases/{id}/interpretations/latest every few seconds, generating constant database reads and still delivering delayed feedback. The requirement was push delivery: when the pipeline finishes, the client knows immediately.',
   architecture:
-    'The design uses two decoupled layers: the EventBus (Redis pub/sub) and the SSE endpoint. The pipeline has no knowledge of SSE — it just calls event_bus.publish(user_id, event_type, payload). The SSE endpoint holds a persistent HTTP connection and subscribes to that user\'s channel via an async generator.',
+    'The design uses two decoupled layers: the EventBus (Redis pub/sub) and the SSE endpoint. The pipeline has no knowledge of SSE, it just calls event_bus.publish(user_id, event_type, payload). The SSE endpoint holds a persistent HTTP connection and subscribes to that user\'s channel via an async generator.',
   flowDiagram:
-    'Client opens GET /notifications/stream\n │\n │  (pipeline finishes — calls event_bus.publish)\n │\n ▼\nEventBus.publish → Redis channel f"events:{user_id}"\n │\n ▼\nEventBus.subscribe (async generator) → yields deserialized event\n │\n ▼\nSSE endpoint → writes "event: interpretation_ready\ndata: {...}\n\n"\n │\n ▼\nClient receives push notification immediately',
+    'Client opens GET /notifications/stream\n │\n │  (pipeline finishes and calls event_bus.publish)\n │\n ▼\nEventBus.publish → Redis channel f"events:{user_id}"\n │\n ▼\nEventBus.subscribe (async generator) → yields deserialized event\n │\n ▼\nSSE endpoint → writes "event: interpretation_ready\ndata: {...}\n\n"\n │\n ▼\nClient receives push notification immediately',
   endpoints: [
-    'GET /notifications/stream — SSE endpoint. Authenticates via Bearer token, subscribes to EventBus, streams events as they arrive, pings every 30 seconds.',
-    'GET /notifications/preferences — Returns the user\'s notification settings (e.g. notify_on_complete flag).',
-    'PATCH /notifications/preferences — Updates notification preferences. The pipeline checks this before publishing.',
-    'EventBus (app/services/events.py) — Redis pub/sub wrapper. publish() serialises to JSON and pushes to channel. subscribe() is an async generator yielding events or None on 30-second timeout (for keepalive handling upstream).',
+    'GET /notifications/stream, SSE endpoint. Authenticates via Bearer token, subscribes to EventBus, streams events as they arrive, pings every 30 seconds.',
+    'GET /notifications/preferences, returns the user\'s notification settings (e.g. notify_on_complete flag).',
+    'PATCH /notifications/preferences, updates notification preferences. The pipeline checks this before publishing.',
+    'EventBus (app/services/events.py), Redis pub/sub wrapper. publish() serialises to JSON and pushes to channel. subscribe() is an async generator yielding events or None on 30-second timeout (for keepalive handling upstream).',
   ],
   challenge: [
-    'SSE connections drop — proxy timeouts, network blips, tab refreshes. When a client reconnects, any events fired while it was disconnected are gone from Redis. The browser\'s SSE spec includes a Last-Event-ID header precisely for this.',
+    'SSE connections drop due to proxy timeouts, network blips, tab refreshes. When a client reconnects, any events fired while it was disconnected are gone from Redis. The browser\'s SSE spec includes a Last-Event-ID header precisely for this.',
     'The solution required two things working together: every event pushed over SSE includes an id: field set to the Notification record\'s database UUID, and every event also writes a Notification row to PostgreSQL with a delivered_at column. On reconnect, if Last-Event-ID is present, the endpoint queries for undelivered notifications created after that ID and replays them before entering the live subscription loop. The Redis pub/sub handles live delivery; the database handles durability and replay. Neither layer knows about the other\'s job.',
   ],
 };
 
 export const reflection = [
-  'The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early on, I was mostly focused on getting endpoints to work. As I progressed, I started thinking more about what “working” actually means in real systems — concurrency issues, failure states, and how services behave under load or bad inputs.',
+  'The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early on, I was mostly focused on getting endpoints to work. As I progressed, I started thinking more about what “working” actually means in real systems, including concurrency issues, failure states, and how services behave under load or bad inputs.',
   
-  'I started the program stronger in Node.js, but along the way I deliberately pushed myself into Python with FastAPI. That transition wasn’t just syntax — it was about learning a different way of structuring APIs, async patterns, and backend architecture. I’m now comfortable building in both ecosystems, even if I still move faster in Node.',
+  'I started the program stronger in Node.js, but along the way I deliberately pushed myself into Python with FastAPI. That transition wasn’t just syntax; it was about learning a different way of structuring APIs, async patterns, and backend architecture. I’m now comfortable building in both ecosystems, even if I still move faster in Node.',
   
   'A big part of my learning came from reading system design materials and immediately trying to apply them in real implementation work. Instead of just consuming concepts like caching, auth flows, or scalability patterns, I had to translate them into actual code decisions in the HNG codebase. That gap between theory and implementation is where most of my growth happened.',
   
@@ -275,7 +275,7 @@ export const reflection = [
   
   'Debugging real issues like failing tests, WebSocket/auth edge cases, and rate limiting forced me to think in terms of system behavior instead of isolated functions. I stopped asking only “does this work?” and started asking “how does this fail, and what happens when it does?”',
   
-  'Overall, HNG pushed me from someone who can build backend features to someone who is actively learning how to design and reason about backend systems — and not just implement them blindly.'
+  'Overall, HNG pushed me from someone who can build backend features to someone who is actively learning how to design and reason about backend systems, and not just implement them blindly.'
 ];
 
 export const contactLinks = [
