@@ -436,20 +436,84 @@ nav .wrap {
 }
 
 footer {
-  padding: 40px 0;
+  padding: clamp(30px, 5vh, 40px) 0;
   text-align: center;
 }
 
 footer p {
   font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-size: clamp(10px, 1.8vw, 12px);
   color: var(--muted);
   letter-spacing: 0.06em;
 }
 
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .hero { padding: 120px 0 60px; }
-  .skills-table, .skill-name, .skill-detail { display: block; width: 100%; padding-left: 0; }
-  .featured-block { padding: 24px; }
+@media (max-width: 768px) {
+  .site-nav {
+    gap: clamp(12px, 2vw, 16px);
+  }
+  
+  .hero-meta {
+    gap: clamp(20px, 4vw, 32px);
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .project-card {
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .project-card::before {
+    position: static;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .project-name {
+    padding-right: 0;
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+
+  .featured-block {
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-table {
+    display: block;
+  }
+
+  .skills-table tr {
+    display: block;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    padding: 16px;
+    background: var(--surface);
+  }
+
+  .skills-table tr:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .skill-name {
+    display: block;
+    width: 100%;
+    padding: 0 0 12px 0;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-detail {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+
+  .reflection-text {
+    max-width: 100%;
+  }
 }
