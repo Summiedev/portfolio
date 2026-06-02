@@ -81,6 +81,24 @@ export const projects = [
     proofHref: 'https://github.com/Summiedev/insighta-backend',
   },
   {
+    stage: 'Stage 4',
+    name: 'Insighta Labs+ Scale — Performance & Redis Caching',
+    description:
+      'Scaled the existing platform for sustained traffic growth by adding Redis caching, query optimization, and reliability controls without changing the Stage 3 auth and RBAC behavior.',
+    stack: [
+      { label: 'Node.js' },
+      { label: 'Redis', accent: true },
+      { label: 'MongoDB' },
+      { label: 'Caching' },
+      { label: 'Monitoring' },
+      { label: 'Single-region Cloud' },
+    ],
+    contribution:
+      'Designed cache-first query paths for repeated filter and aggregation patterns, added Redis result caching and invalidation, tuned MongoDB indexes for large profile sets, introduced performance logging, and kept auth/RBAC intact while reducing database load.',
+    proofText: 'github.com/Summiedev/insighta-backend (scale design)',
+    proofHref: 'https://github.com/Summiedev/insighta-backend',
+  },
+  {
     stage: 'Stage 5',
     name: 'Clinical Lab Insight — AI Analysis Pipeline',
     description:
@@ -118,9 +136,9 @@ export const projects = [
   },
   {
     stage: 'Stage 6',
-    name: 'Clinical API — EventBus & SSE Notifications',
+    name: 'Clinsights API — EventBus & SSE Notifications',
     description:
-      'Real-time notification delivery for the clinical AI pipeline. When a lab result finishes processing, the server pushes an event to the connected client immediately via Server-Sent Events — no polling. Part of a larger Stage 6 system alongside a fault-tolerant pipeline and WebSocket chat.',
+      'Real-time notification delivery for the Clinsights pipeline. When a lab result finishes processing, the server pushes an event to the connected client immediately via Server-Sent Events — no polling. Part of a larger Stage 6 system alongside a fault-tolerant pipeline and WebSocket chat.',
     stack: [
       { label: 'Python' },
       { label: 'FastAPI' },
@@ -140,49 +158,91 @@ export const skills = [
   {
     name: 'API Design',
     detail:
-      'Designed RESTful APIs across Node.js (Vercel serverless) and Python (FastAPI). Built versioned endpoints, consistent error shapes, pagination contracts with HATEOAS links. Projects: Task 01, 02, 03, 05, 06.',
+      'Designed RESTful APIs across Node.js (Vercel serverless) and Python (FastAPI). Built versioned endpoints, consistent error shapes, and pagination contracts with HATEOAS-style links.',
   },
   {
     name: 'Authentication',
     detail:
-      'GitHub OAuth 2.0 with PKCE, JWT access + refresh token lifecycle with rotation and server-side revocation, role-based access control (admin/analyst), per-request auth middleware. Project: Insighta Labs+ Backend (Stage 3).',
+      'GitHub OAuth 2.0 with PKCE, JWT access + refresh token lifecycle with rotation and server-side revocation, role-based access control (admin/analyst), and per-request auth middleware for Insighta Labs+ Backend.',
   },
   {
     name: 'Databases',
     detail:
-      'MongoDB Atlas (native driver, compound indexes, bulk writes, aggregations) and PostgreSQL (async via asyncpg, Alembic migrations, indexed foreign keys). Projects: Task 01–03 (Mongo), Task 05–06 (Postgres).',
+      'MongoDB Atlas (native driver, compound indexes, bulk writes, aggregations) and PostgreSQL (async via asyncpg, Alembic migrations, indexed foreign keys) for analytics and stateful backend workloads.',
   },
   {
     name: 'Background Jobs',
     detail:
-      'Celery workers with Redis broker for async OCR + AI processing. Separate named queues, pool configuration for Windows/Linux, acks_late for at-least-once delivery. Project: Clinical Lab Insight (Stage 5).',
+      'Celery workers with Redis broker for async OCR and AI processing. Separate named queues, pool configuration for Windows/Linux, and acks_late for at-least-once delivery in the Clinsights pipeline.',
   },
   {
     name: 'Real-time / SSE',
     detail:
-      'Server-Sent Events endpoint with async generator pattern, Redis pub/sub EventBus, 30-second keepalive pings, Last-Event-ID missed-event replay, clean request.is_disconnected() handling. Project: Clinical API SSE (Stage 6).',
+      'Server-Sent Events endpoint with async generator pattern, Redis pub/sub EventBus, 30-second keepalive pings, Last-Event-ID missed-event replay, and clean request.is_disconnected() handling for Clinsights notifications.',
   },
   {
     name: 'Storage & Durability',
     detail:
-      'Append-only log design (Bitcask pattern), byte-offset indexing, crash recovery via log replay, concurrent write serialization, unicode-correct byte accounting. Project: Event Store (Stage 8A).',
+      'Append-only log design (Bitcask pattern), byte-offset indexing, crash recovery via log replay, concurrent write serialization, and unicode-correct byte accounting.',
   },
   {
     name: 'Rate Limiting',
     detail:
-      'Per-endpoint rate limiting with separate windows for auth (10 req/min) and query (60 req/min) endpoints, 429 responses with correct headers. Project: Insighta Labs+ Backend (Stage 3).',
+      'Per-endpoint rate limiting with separate windows for auth (10 req/min) and query (60 req/min) endpoints, returning 429 responses with the correct rate-limit headers.',
+  },
+  {
+    name: 'Performance & Caching',
+    detail:
+      'Optimized slow query paths and reduced DB pressure using Redis caching for repeated filter/aggregation queries, cache invalidation on profile ingestion, and heatmap-based query tuning.',
+  },
+  {
+    name: 'System Design & Scaling',
+    detail:
+      'Designed the platform for hundreds to thousands of queries per minute with single-region reliability, read-heavy cache layering, and maintainable growth without microservice complexity.',
+  },
+  {
+    name: 'Observability',
+    detail:
+      'Added request logging, latency metrics, and query tracing to identify hot queries and slow paths. The instrumentation guided caching and index decisions.',
   },
   {
     name: 'Testing & Deployment',
     detail:
-      'Integration test scripts against live endpoints, pytest setup with pre-commit hooks, GitHub Actions CI/CD pipeline (lint → test → build → deploy), Vercel serverless deployments. Projects: Task 03, 05.',
+      'Integration test scripts against live endpoints, pytest setup with pre-commit hooks, GitHub Actions CI/CD pipeline (lint → test → build → deploy), and Vercel serverless deployments.',
   },
   {
     name: 'Logging',
     detail:
-      'Structured per-request logging (method, endpoint, status, latency). Pipeline audit log with full event history per case (event type, provider, duration, attempt, error). Projects: Task 03, Stage 6.',
+      'Structured per-request logging (method, endpoint, status, latency) and pipeline audit trails tracking event type, provider, duration, attempt, and error.',
   },
 ];
+
+export const contactIntro =
+  'I’m available for backend roles, contract work, and technical collaboration. If you want a reliable API, secure auth stack, or scalable data pipeline, let’s connect and make it happen.';
+
+export const stage4 = {
+  title: 'Stage 4 — Scale Insighta Labs+',
+  summary:
+    'Scaled the existing Insighta Labs+ backend without changing Stage 3 auth, RBAC, CLI, or web portal behavior. Focused on query performance, cache hit rate, database load reduction, and single-region reliability for read-heavy traffic.',
+  requirements: [
+    'Keep Stage 3 features intact: GitHub OAuth, RBAC, CLI, web portal, CSV export.',
+    'Support hundreds to low thousands of queries per minute with near-interactive latency.',
+    'Reduce database load by caching repeated query results and hot filter patterns.',
+    'Provide clear observability for query latency and cache effectiveness.',
+    'Maintain simple, maintainable architecture with managed services where appropriate.',
+  ],
+  decisions: [
+    'Add Redis as a read-through cache for repeated query results, with a TTL for short-lived data and explicit invalidation on profile ingestion.',
+    'Keep the existing API surface unchanged while routing repeated queries through a cache layer before MongoDB.',
+    'Use managed Redis and a single-region deployment to reduce operational complexity.',
+    'Instrument query latency and cache hit rate instead of building a complex distributed system.',
+  ],
+  tradeoffs: [
+    'Cache invalidation is kept simple and conservative; stale data is possible for a short window but is acceptable for read-heavy analytics.',
+    'This design is optimized for single-region traffic and does not address global distribution or cross-region failover.',
+    'The system increases operational dependence on Redis availability, so Redis monitoring becomes a first-class reliability requirement.',
+  ],
+};
 
 export const featured = {
   title: 'Clinical API — SSE Notification System',
@@ -205,11 +265,17 @@ export const featured = {
 };
 
 export const reflection = [
-  'The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early stages were about making things work. Later stages were about understanding what "work" actually means under concurrent load, network failures, and process restarts.',
-  'Task 08A made this concrete. Before it, I thought of databases as external services you connect to. Building the event store from scratch — tracking byte offsets, streaming log replay, serialising concurrent writes into a queue — showed me what a database is actually doing underneath. The WAL pattern, Bitcask, log-structured storage: these stopped being interview terms and became mental models I actually use.',
-  'The SSE work on the clinical API was the first time I built a genuinely stateful server feature. Getting async generators right, handling disconnects cleanly, and figuring out the replay problem — those required understanding the whole request lifecycle, not just the happy path. I learned to design for the edges first.',
-  'The auth system in Stage 3 taught me that security is a series of explicit decisions, not a default. PKCE matters. Token rotation matters. Centralised middleware matters — not scattering role checks across every handler. Every shortcut I considered and rejected made the resulting code more trustworthy.',
-  'Technically, I came in stronger on Node.js and left also comfortable with the Python async ecosystem — FastAPI, asyncpg, Celery, Alembic. I\'m slower in Python than in Node.js but I know the patterns now. That was the gap I wanted to close.',
+  'The biggest shift for me during HNG was moving from feature thinking to systems thinking. Early on, I was mostly focused on getting endpoints to work. As I progressed, I started thinking more about what “working” actually means in real systems — concurrency issues, failure states, and how services behave under load or bad inputs.',
+  
+  'I started the program stronger in Node.js, but along the way I deliberately pushed myself into Python with FastAPI. That transition wasn’t just syntax — it was about learning a different way of structuring APIs, async patterns, and backend architecture. I’m now comfortable building in both ecosystems, even if I still move faster in Node.',
+  
+  'A big part of my learning came from reading system design materials and immediately trying to apply them in real implementation work. Instead of just consuming concepts like caching, auth flows, or scalability patterns, I had to translate them into actual code decisions in the HNG codebase. That gap between theory and implementation is where most of my growth happened.',
+  
+  'Working through authentication and session-related issues made me realize how many decisions sit underneath “simple login.” Things like refresh token handling, middleware structure, and security trade-offs taught me that backend systems are really about consistency and explicit design choices, not convenience.',
+  
+  'Debugging real issues like failing tests, WebSocket/auth edge cases, and rate limiting forced me to think in terms of system behavior instead of isolated functions. I stopped asking only “does this work?” and started asking “how does this fail, and what happens when it does?”',
+  
+  'Overall, HNG pushed me from someone who can build backend features to someone who is actively learning how to design and reason about backend systems — and not just implement them blindly.'
 ];
 
 export const contactLinks = [

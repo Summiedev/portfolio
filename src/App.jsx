@@ -1,16 +1,25 @@
-﻿import SectionHeader from './components/SectionHeader';
+﻿import { useEffect, useState } from 'react';
+import SectionHeader from './components/SectionHeader';
 import ProjectCard from './components/ProjectCard';
 import ContactCard from './components/ContactCard';
 import {
   profile,
   projects,
   skills,
+  stage4,
   featured,
   reflection,
   contactLinks,
+  contactIntro,
 } from './data/portfolioData';
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
   return (
     <div className="site-shell">
       <nav>
@@ -19,10 +28,14 @@ function App() {
           <div className="site-nav">
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
+            <a href="#scale">Scale</a>
             <a href="#featured">Deep Dive</a>
             <a href="#learning">Reflection</a>
             <a href="#contact">Contact</a>
           </div>
+          <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            {theme === 'dark' ? 'Light' : 'Dark'} mode
+          </button>
         </div>
       </nav>
 
@@ -75,10 +88,56 @@ function App() {
         </div>
       </section>
 
-      <section className="section" id="featured">
+      <section className="section" id="scale">
         <div className="wrap">
           <div className="section-header">
             <span className="section-num">03</span>
+            <h2 className="section-title">Stage 4 Scale</h2>
+            <div className="section-line"></div>
+          </div>
+          <div className="featured-block">
+            <div className="featured-subtitle">Systems Design</div>
+            <div className="featured-title">{stage4.title}</div>
+
+            <div className="featured-section">
+              <h4>Overview</h4>
+              <p>{stage4.summary}</p>
+            </div>
+
+            <div className="featured-section">
+              <h4>Requirements</h4>
+              <ul>
+                {stage4.requirements.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="featured-section">
+              <h4>Design Decisions</h4>
+              <ul>
+                {stage4.decisions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="featured-section">
+              <h4>Trade-offs</h4>
+              <ul>
+                {stage4.tradeoffs.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="featured">
+        <div className="wrap">
+          <div className="section-header">
+            <span className="section-num">04</span>
             <h2 className="section-title">Featured Project</h2>
             <div className="section-line"></div>
           </div>
@@ -119,7 +178,7 @@ function App() {
       <section className="section" id="learning">
         <div className="wrap">
           <div className="section-header">
-            <span className="section-num">04</span>
+            <span className="section-num">05</span>
             <h2 className="section-title">Learning Reflection</h2>
             <div className="section-line"></div>
           </div>
@@ -134,10 +193,11 @@ function App() {
       <section className="section" id="contact">
         <div className="wrap">
           <div className="section-header">
-            <span className="section-num">05</span>
+            <span className="section-num">06</span>
             <h2 className="section-title">Contact</h2>
             <div className="section-line"></div>
           </div>
+          <p className="contact-intro">{contactIntro}</p>
           <div className="contact-grid">
             {contactLinks.map((contact) => (
               <ContactCard key={contact.label} {...contact} />

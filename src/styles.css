@@ -11,6 +11,19 @@
   --blue: #7ab3d4;
 }
 
+:root[data-theme='light'] {
+  --bg: #f7f5ef;
+  --surface: #ffffff;
+  --border: #e1ddd4;
+  --text: #1f1c17;
+  --muted: #6b675c;
+  --accent: #8d7a4f;
+  --accent-dim: #a89f82;
+  --green: #4a8f6f;
+  --red: #c55d5d;
+  --blue: #5a8fb6;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -60,6 +73,24 @@ nav .wrap {
   justify-content: space-between;
   padding: clamp(12px, 2vh, 16px) 0;
   gap: 20px;
+}
+
+.theme-toggle {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(201, 185, 110, 0.08);
 }
 
 .nav-logo {
@@ -407,6 +438,13 @@ nav .wrap {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2px;
+}
+
+.contact-intro {
+  margin: 0 0 20px;
+  line-height: 1.7;
+  max-width: 760px;
+  color: var(--muted);
 }
 
 .contact-card {
