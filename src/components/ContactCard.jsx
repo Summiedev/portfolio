@@ -1,14 +1,19 @@
-﻿export default function ContactCard({ label, value, href }) {
-  const Wrapper = href ? 'a' : 'div';
+export default function ContactCard({ label, value, href, icon }) {
+  const Wrapper = href ? "a" : "div";
+
   return (
-    <Wrapper className="contact-card" href={href} target={href ? '_blank' : undefined} rel={href ? 'noreferrer' : undefined}>
-      <div className="contact-main">
-        <div className="contact-label">{label}</div>
+    <Wrapper
+      className="contact-link-item"
+      href={href || undefined}
+      target={href && !href.startsWith("mailto") ? "_blank" : undefined}
+      rel={href ? "noreferrer" : undefined}
+    >
+      <div className="cli-icon">{icon}</div>
+      <div className="cli-text">
+        <div className="cli-label">{label}</div>
+        <div className="cli-value">{value}</div>
       </div>
-      <div className="contact-details">
-        <div className="contact-label">{label}</div>
-        <div className="contact-value">{value}</div>
-      </div>
+      {href && <span className="cli-arrow">-&gt;</span>}
     </Wrapper>
   );
 }
